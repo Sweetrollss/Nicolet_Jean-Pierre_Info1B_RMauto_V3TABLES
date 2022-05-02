@@ -9,12 +9,12 @@ try:
     """
         Une seule requête pour montrer la récupération des données de la BD en MySql.
     """
-    strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genre ORDER BY id_genre ASC"""
+    Vehicule = """SELECT * FROM	t_vehicule WHERE	prix_vehicule >= 60000"""
 
     with DBconnection() as db:
-        db.execute(strsql_genres_afficher)
+        db.execute(Vehicule)
         result = db.fetchall()
-        print("data_genres ", result, " Type : ", type(result))
+        print("Vehicule ", result, " Type : ", type(result))
 
 
 except Exception as erreur:
