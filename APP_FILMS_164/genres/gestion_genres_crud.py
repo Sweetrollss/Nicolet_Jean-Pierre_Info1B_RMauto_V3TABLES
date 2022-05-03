@@ -33,7 +33,7 @@ def genres_afficher(order_by, id_genre_sel):
         try:
             with DBconnection() as mc_afficher:
                 if order_by == "ASC" and id_genre_sel == 0:
-                    strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genre ORDER BY id_genre ASC"""
+                    strsql_genres_afficher = """SELECT id_adresse, nom_adresse FROM t_adresse ORDER BY id_adresse ASC"""
                     mc_afficher.execute(strsql_genres_afficher)
                 elif order_by == "ASC":
                     # C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
@@ -42,11 +42,11 @@ def genres_afficher(order_by, id_genre_sel):
                     # donc, je précise les champs à afficher
                     # Constitution d'un dictionnaire pour associer l'id du genre sélectionné avec un nom de variable
                     valeur_id_genre_selected_dictionnaire = {"value_id_genre_selected": id_genre_sel}
-                    strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genre WHERE id_genre = %(value_id_genre_selected)s"""
+                    strsql_genres_afficher = """SELECT id_adresse, nom_adresse FROM t_adresse WHERE id_adresse = %(value_id_genre_selected)s"""
 
                     mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
                 else:
-                    strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genre ORDER BY id_genre DESC"""
+                    strsql_genres_afficher = """SELECT id_adresse, nom_adresse FROM t_adresse ORDER BY id_adresse DESC"""
 
                     mc_afficher.execute(strsql_genres_afficher)
 
@@ -259,10 +259,10 @@ def genre_delete_wtf():
             print(id_genre_delete, type(id_genre_delete))
 
             # Requête qui affiche tous les films_genres qui ont le genre que l'utilisateur veut effacer
-            str_sql_genres_films_delete = """SELECT id_adresse_pers, nom_personne, id_adresse, nom_adresse FROM t_adresse_pers 
-                                            INNER JOIN t_personne ON t_adresse_pers.fk_personne = t_personne.id_personne
-                                            INNER JOIN t_adresse ON t_adresse_pers.fk_adresse = t_adresse.id_adresse
-                                            WHERE fk_adresse = %(value_id_adresse)s"""
+            str_sql_genres_films_delete = """SELECT id_genre_film, nom_film, id_genre, intitule_genre FROM t_genre_film 
+                                            INNER JOIN t_film ON t_genre_film.fk_film = t_film.id_film
+                                            INNER JOIN t_genre ON t_genre_film.fk_genre = t_genre.id_genre
+                                            WHERE fk_genre = %(value_id_genre)s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, valeur_select_dictionnaire)
