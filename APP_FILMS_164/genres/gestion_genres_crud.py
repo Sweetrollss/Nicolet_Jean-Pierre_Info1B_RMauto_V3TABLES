@@ -162,7 +162,7 @@ def genre_update_wtf():
             valeur_update_dictionnaire = {"value_id_genre": id_genre_update, "value_name_genre": name_genre_update}
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_intitulegenre = """UPDATE t_genre SET intitule_genre = %(value_name_genre)s WHERE id_genre = %(value_id_genre)s"""
+            str_sql_update_intitulegenre = """UPDATE t_adresse SET nom_adresse = %(value_name_genre)s WHERE id_adresse = %(value_id_genre)s"""
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_intitulegenre, valeur_update_dictionnaire)
 
@@ -241,7 +241,7 @@ def genre_delete_wtf():
                 print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
                 str_sql_delete_films_genre = """DELETE FROM t_genre_film WHERE fk_genre = %(value_id_genre)s"""
-                str_sql_delete_idgenre = """DELETE FROM t_genre WHERE id_genre = %(value_id_genre)s"""
+                str_sql_delete_idgenre = """DELETE FROM t_adresse WHERE id_adresse = %(value_id_genre)s"""
                 # Manière brutale d'effacer d'abord la "fk_genre", même si elle n'existe pas dans la "t_genre_film"
                 # Ensuite on peut effacer le genre vu qu'il n'est plus "lié" (INNODB) dans la "t_genre_film"
                 with DBconnection() as mconn_bd:
